@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 1 - Construye aplicaciones web</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="module-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="module-box">
+                    <h2>Módulo IV</h2>
+                </div>
+                <div class="module-info">
+                    <h1>Desarrolla aplicaciones web en un sistema de información</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="submodule-1-content">
+            <h2>Submódulo 1 - Construye aplicaciones web</h2>
+            <div class="tabs">
+                <button class="tab-button active animated-btn" data-tab="html">HTML</button>
+                <button class="tab-button animated-btn" data-tab="css">CSS</button>
+                <button class="tab-button animated-btn" data-tab="javascript">JavaScript</button>
+            </div>
+
+            <!-- HTML Section -->
+            <div class="tab-content active" id="html-content">
+                <h3>Estructura HTML Básica</h3>
+                <p>HTML es el lenguaje fundamental para crear páginas web. Aquí encontrarás ejemplos prácticos.</p>
+
+                <!-- Ejemplo 1: Estructura Básica -->
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Estructura Básica</span>
+                        <button class="copy-button animated-btn">Copiar</button>
+                    </div>
+                    <pre><code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Mi Página HTML&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;¡Hola, mundo!&lt;/h1&gt;
+    &lt;p&gt;Este es un párrafo en HTML.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                    </code></pre>
+                    <div class="code-explanation">
+                        <h4>Explicación:</h4>
+                        <p>Esta estructura básica de HTML define el esqueleto de cualquier página web. Incluye el DOCTYPE, metadatos y el contenido principal dentro del elemento `<body>`.</p>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 2: Formularios -->
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Formularios</span>
+                        <button class="copy-button animated-btn">Copiar</button>
+                    </div>
+                    <pre><code class="language-html">
+&lt;form&gt;
+    &lt;label for="nombre"&gt;Nombre:&lt;/label&gt;
+    &lt;input type="text" id="nombre" name="nombre" required&gt;&lt;br&gt;
+    &lt;label for="edad"&gt;Edad:&lt;/label&gt;
+    &lt;input type="number" id="edad" name="edad"&gt;&lt;br&gt;
+    &lt;label for="mensaje"&gt;Mensaje:&lt;/label&gt;&lt;br&gt;
+    &lt;textarea id="mensaje" name="mensaje" rows="4"&gt;&lt;/textarea&gt;&lt;br&gt;
+    &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;
+                    </code></pre>
+                    <div class="code-explanation">
+                        <h4>Explicación:</h4>
+                        <p>Este formulario incluye etiquetas para campos de texto, números y un área de texto para mensajes. Cada campo está relacionado con un `<label>` para accesibilidad.</p>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 3: Tablas -->
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Tablas</span>
+                        <button class="copy-button animated-btn">Copiar</button>
+                    </div>
+                    <pre><code class="language-html">
+&lt;table border="1"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Nombre&lt;/th&gt;
+            &lt;th&gt;Edad&lt;/th&gt;
+            &lt;th&gt;Ciudad&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Juan&lt;/td&gt;
+            &lt;td&gt;25&lt;/td&gt;
+            &lt;td&gt;Madrid&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;María&lt;/td&gt;
+            &lt;td&gt;30&lt;/td&gt;
+            &lt;td&gt;Barcelona&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+                    </code></pre>
+                    <div class="code-explanation">
+                        <h4>Explicación:</h4>
+                        <p>Las tablas se utilizan para mostrar datos en un formato estructurado, con encabezados en `<thead>` y filas en `<tbody>`.</p>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 4: Multimedia -->
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Contenido Multimedia</span>
+                        <button class="copy-button animated-btn">Copiar</button>
+                    </div>
+                    <pre><code class="language-html">
+&lt;figure&gt;
+    &lt;img src="imagen.jpg" alt="Descripción de la imagen"&gt;
+    &lt;figcaption&gt;Pie de foto explicativo.&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;audio controls&gt;
+    &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+    Tu navegador no soporta audio.
+&lt;/audio&gt;
+
+&lt;video controls&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+    Tu navegador no soporta video.
+&lt;/video&gt;
+                    </code></pre>
+                    <div class="code-explanation">
+                        <h4>Explicación:</h4>
+                        <p>Este ejemplo incluye elementos multimedia como imágenes con pie de foto, audio y video con controles integrados.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CSS Section -->
+            <div class="tab-content" id="css-content">
+                <h3>Estilos con CSS</h3>
+                <p>CSS permite dar estilo y diseño a nuestras páginas web. Aquí se incluyen ejemplos clave:</p>
+
+                <!-- Ejemplo 1: Básico -->
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Estilos Básicos</span>
+                        <button class="copy-button animated-btn">Copiar</button>
+                    </div>
+                    <pre><code class="language-css">
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+h1 {
+    color: #007BFF;
+    text-align: center;
+}
+                    </code></pre>
+                    <div class="code-explanation">
+                        <h4>Explicación:</h4>
+                        <p>Define estilos generales para texto y encabezados, aplicando fuentes y colores personalizados.</p>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 2: Flexbox -->
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Flexbox</span>
+                        <button class="copy-button animated-btn">Copiar</button>
+                    </div>
+                    <pre><code class="language-css">
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+}
+.item {
+    background: #007BFF;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+                    </code></pre>
+                    <div class="code-explanation">
+                        <h4>Explicación:</h4>
+                        <p>Flexbox es un modelo de diseño poderoso que permite distribuir elementos de forma flexible y alinearlos vertical y horizontalmente.</p>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 3: Grid -->
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Grid</span>
+                        <button class="copy-button animated-btn">Copiar</button>
+                    </div>
+                    <pre><code class="language-css">
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+.card {
+    background: #f4f4f4;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+                    </code></pre>
+                    <div class="code-explanation">
+                        <h4>Explicación:</h4>
+                        <p>Grid Layout permite crear diseños complejos dividiendo el espacio en áreas cuadradas organizadas.</p>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 4: Animaciones -->
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Animaciones</span>
+                        <button class="copy-button animated-btn">Copiar</button>
+                    </div>
+                    <pre><code class="language-css">
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.button {
+    animation: fadeIn 2s ease-in-out;
+}
+                    </code></pre>
+                    <div class="code-explanation">
+                        <h4>Explicación:</h4>
+                        <p>Las animaciones CSS permiten agregar transiciones visuales dinámicas, como este efecto de "aparecer".</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JavaScript Section -->
+            <div class="tab-content" id="javascript-content">
+                <h3>JavaScript Interactivo</h3>
+                <p>JavaScript agrega interactividad a nuestras páginas web. Aquí se muestran varios ejemplos:</p>
+
+                <!-- Ejemplo 1: Contador -->
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Contador</span>
+                        <button class="copy-button animated-btn">Copiar</button>
+                    </div>
+                    <pre><code class="language-javascript">
+let contador = 0;
+const incrementar = () => {
+    contador++;
+    document.getElementById('contador').textContent = contador;
+};
+document.getElementById('increment-btn').addEventListener('click', incrementar);
+                    </code></pre>
+                    <div class="code-explanation">
+                        <h4>Explicación:</h4>
+                        <p>Este ejemplo muestra cómo actualizar el DOM en tiempo real respondiendo a un evento de clic.</p>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 2: Fetch API -->
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Fetch API</span>
+                        <button class="copy-button animated-btn">Copiar</button>
+                    </div>
+                    <pre><code class="language-javascript">
+fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+                    </code></pre>
+                    <div class="code-explanation">
+                        <h4>Explicación:</h4>
+                        <p>Fetch API permite realizar solicitudes HTTP y manejar datos de manera asíncrona.</p>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 3: Validación de formularios -->
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Validación</span>
+                        <button class="copy-button animated-btn">Copiar</button>
+                    </div>
+                    <pre><code class="language-javascript">
+const formulario = document.getElementById('miFormulario');
+formulario.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const nombre = formulario.nombre.value;
+    if (nombre === '') {
+        alert('El campo Nombre es obligatorio');
+    } else {
+        alert('Formulario enviado');
+    }
+});
+                    </code></pre>
+                    <div class="code-explanation">
+                        <h4>Explicación:</h4>
+                        <p>Este código evita el envío de un formulario vacío, mostrando una alerta si el campo requerido está vacío.</p>
+                    </div>
+                </div>
+
+                <!-- Ejemplo 4: Manipulación del DOM -->
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>DOM</span>
+                        <button class="copy-button animated-btn">Copiar</button>
+                    </div>
+                    <pre><code class="language-javascript">
+const boton = document.getElementById('cambiarColor');
+boton.addEventListener('click', function() {
+    document.body.style.backgroundColor = '#f0f0f0';
+});
+                    </code></pre>
+                    <div class="code-explanation">
+                        <h4>Explicación:</h4>
+                        <p>Manipula el DOM para cambiar dinámicamente el color de fondo al hacer clic en un botón.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+ <nav>
+            <a href="index.html" class="btn animated-btn">Volver al Menú Principal</a>
+            <a href="modulo2.html" class="btn animated-btn">Ir al Módulo 2</a>
+            <a href="modulo3.html" class="btn animated-btn">Ir al Módulo 3</a>
+        </nav>
+
+
+    <script src="modulo2.js"></script>
+</body>
+</html>

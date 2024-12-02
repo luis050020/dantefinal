@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3 - Code Masters Challenge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2c2c2c;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            color: #61dafb;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        nav {
+            margin-top: 20px;
+        }
+        .btn {
+            background-color: #61dafb;
+            color: #282c34;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #45b6fe;
+        }
+        .game-container {
+            background-color: #282c34;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .game-title {
+            color: #61dafb;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        .game-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        #game-area {
+            min-height: 300px;
+            background-color: #21252b;
+            border-radius: 5px;
+            padding: 20px;
+            font-family: 'Source Code Pro', monospace;
+        }
+        .code-word-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        .code-word-cell {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #3a3a3a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .code-word-cell.correct {
+            background-color: #4caf50;
+            border-color: #4caf50;
+        }
+        .code-word-cell.wrong-position {
+            background-color: #ff9800;
+            border-color: #ff9800;
+        }
+        .code-word-cell.incorrect {
+            background-color: #f44336;
+            border-color: #f44336;
+        }
+        #code-word-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .color-box {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .maze {
+            display: grid;
+            gap: 2px;
+            margin-top: 20px;
+        }
+        .maze-cell {
+            width: 30px;
+            height: 30px;
+            background-color: #1e1e1e;
+            border: 1px solid #3a3a3a;
+        }
+        .maze-cell.wall {
+            background-color: #3a3a3a;
+        }
+        .maze-cell.player {
+            background-color: #61dafb;
+        }
+        .maze-cell.goal {
+            background-color: #4caf50;
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #4caf50;
+        }
+        .hint {
+            margin-top: 10px;
+            font-style: italic;
+            color: #888;
+        }
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .emoji-match-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .emoji-card {
+            width: 80px;
+            height: 80px;
+            background-color: #3a3a3a;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .emoji-card:hover {
+            transform: scale(1.05);
+        }
+        .emoji-card.flipped {
+            background-color: #61dafb;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Code Masters Challenge</h1>
+            <nav>
+                <a href="index.html" class="btn">Volver al Inicio</a>
+                <a href="modulo1.html" class="btn">Ir a Módulo 1</a>
+                <a href="modulo2.html" class="btn">Ir a Módulo 2</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="game-container">
+            <h2 class="game-title">Elige tu Desafío</h2>
+            <p class="game-description">Demuestra tus habilidades en HTML, CSS y JavaScript con estos emocionantes juegos. ¡Conviértete en un Code Master!</p>
+            <div>
+                <button id="game1" class="btn">Code Word</button>
+                <button id="game2" class="btn">CSS Color Match</button>
+                <button id="game3" class="btn">Logic Labyrinth</button>
+                <button id="game4" class="btn">Emoji Match</button>
+            </div>
+        </div>
+
+        <div id="game-area"></div>
+        <div id="message"></div>
+    </main>
+
+    <canvas id="confetti-canvas"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        const gameArea = document.getElementById('game-area');
+        const messageArea = document.getElementById('message');
+
+        const words = [
+        { word: 'MOUSE', hint: 'Dispositivo para mover el cursor' },
+{ word: 'KEYBOARD', hint: 'Teclado de la computadora' },
+{ word: 'SCREEN', hint: 'Pantalla donde ves todo' },
+{ word: 'ICON', hint: 'Pequeño símbolo de un programa' },
+{ word: 'CLICK', hint: 'Acción de presionar el ratón' },
+{ word: 'WINDOW', hint: 'Ventana que muestra un programa' },
+{ word: 'FILE', hint: 'Documento guardado en la PC' },
+{ word: 'FOLDER', hint: 'Carpeta que guarda archivos' },
+{ word: 'DESKTOP', hint: 'Pantalla principal de la PC' },
+{ word: 'CONTRASEÑA', hint: 'Clave secreta para acceder' },
+{ word: 'VIRUS', hint: 'Programa dañino para la PC' },
+{ word: 'INTERNET', hint: 'Conexión para navegar páginas' },
+{ word: 'EMAIL', hint: 'Mensaje electrónico' },
+{ word: 'GAME', hint: 'Programa para jugar' },
+{ word: 'APP', hint: 'Aplicación o programa' },
+{ word: 'TEXT', hint: 'Mensaje de letras' },
+{ word: 'SAVE', hint: 'Guardar un archivo' },
+{ word: 'PRINT', hint: 'Imprimir un documento' },
+{ word: 'LOAD', hint: 'Abrir un archivo o programa' },
+{ word: 'EXIT', hint: 'Cerrar un programa' }
+
+        ];
+
+        // Code Word Game
+        function startCodeWord() {
+            let targetWord = words[Math.floor(Math.random() * words.length)];
+            let attempts = 0;
+            const maxAttempts = 6;
+
+            gameArea.innerHTML = `
+                <h3>Code Word</h3>
+                <p>Adivina la palabra de programación (${targetWord.word.length} letras). Tienes ${maxAttempts} intentos.</p>
+                <div id="code-word-grids"></div>
+                <input type="text" id="code-word-input" maxlength="${targetWord.word.length}" placeholder="Ingresa tu palabra">
+                <button id="submit-guess" class="btn">Adivinar</button>
+                <p class="hint">Pista: ${targetWord.hint}</p>
+            `;
+
+            const gridsContainer = document.getElementById('code-word-grids');
+            const input = document.getElementById('code-word-input');
+            const submitButton = document.getElementById('submit-guess');
+
+            function createNewGrid() {
+                const grid = document.createElement('div');
+                grid.classList.add('code-word-grid');
+                grid.style.gridTemplateColumns = `repeat(${targetWord.word.length}, 1fr)`;
+                for (let i = 0; i < targetWord.word.length; i++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('code-word-cell');
+                    grid.appendChild(cell);
+                }
+                gridsContainer.appendChild(grid);
+                return grid;
+            }
+
+            function checkGuess(guess) {
+                const grid = createNewGrid();
+                const cells = grid.children;
+                const remainingLetters = targetWord.word.split('');
+
+                // First pass: check for correct letters in correct positions
+                for (let i = 0; i < guess.length; i++) {
+                    if (guess[i] === targetWord.word[i]) {
+                        cells[i].textContent = guess[i];
+                        cells[i].classList.add('correct');
+                        remainingLetters[i] = null;
+                    }
+                }
+
+                // Second pass: check for correct letters in wrong positions
+                for (let i = 0; i < guess.length; i++) {
+                    if (!cells[i].classList.contains('correct')) {
+                        const index = remainingLetters.indexOf(guess[i]);
+                        if (index !== -1) {
+                            cells[i].textContent = guess[i];
+                            cells[i].classList.add('wrong-position');
+                            remainingLetters[index] = null;
+                        } else {
+                            cells[i].textContent = guess[i];
+                            cells[i].classList.add('incorrect');
+                        }
+                    }
+                }
+
+                attempts++;
+
+                if (guess === targetWord.word) {
+                    messageArea.textContent = '¡Felicidades! Has adivinado la palabra.';
+                    messageArea.style.color = '#4caf50';
+                    input.disabled = true;
+                    submitButton.disabled = true;
+                    showConfetti();
+                } else if (attempts >= maxAttempts) {
+                    messageArea.textContent = `Se acabaron los intentos. La palabra era ${targetWord.word}.`;
+                    messageArea.style.color = '#f44336';
+                    input.disabled = true;
+                    submitButton.disabled = true;
+                }
+            }
+
+            submitButton.addEventListener('click', () => {
+                const guess = input.value.toUpperCase();
+                if (guess.length === targetWord.word.length) {
+                    checkGuess(guess);
+                    input.value = '';
+                } else {
+                    messageArea.textContent = `La palabra debe tener ${targetWord.word.length} letras.`;
+                    messageArea.style.color = '#ff9800';
+                }
+            });
+
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    submitButton.click();
+                }
+            });
+        }
+
+        // CSS Color Match Game
+        function startCSSColorMatch() {
+            const colors = [
+                { name: 'Rojo', hex: '#FF0000' },
+                { name: 'Verde', hex: '#00FF00' },
+                { name: 'Azul', hex: '#0000FF' },
+                { name: 'Amarillo', hex: '#FFFF00' },
+                { name: 'Magenta', hex: '#FF00FF' },
+                { name: 'Cian', hex: '#00FFFF' }
+            ];
+
+            const targetColor = colors[Math.floor(Math.random() * colors.length)];
+            const shuffledColors = [...colors].sort(() => Math.random() - 0.5);
+
+            gameArea.innerHTML = `
+                <h3>CSS Color Match</h3>
+                <p>Selecciona el color que corresponde a: ${targetColor.name}</p>
+                <div id="color-options"></div>
+            `;
+
+            const colorOptions = document.getElementById('color-options');
+
+            shuffledColors.forEach(color => {
+                const colorBox = document.createElement('div');
+                colorBox.classList.add('color-box');
+                colorBox.style.backgroundColor = color.hex;
+                colorBox.addEventListener('click', () => {
+                    if (color === targetColor) {
+                        messageArea.textContent = '¡Correcto! Has seleccionado el color adecuado.';
+                        messageArea.style.color = '#4caf50';
+                    } else {
+                        messageArea.textContent = 'Incorrecto. Intenta de nuevo.';
+                        messageArea.style.color = '#ff9800';
+                    }
+                });
+                colorOptions.appendChild(colorBox);
+            });
+        }
+
+        // Logic Labyrinth Game
+        function startLogicLabyrinth() {
+            const maze = [
+                [0, 0, 1, 0, 0],
+                [1, 0, 0, 0, 1],
+                [0, 1, 1, 0, 0],
+                [0, 0, 0, 1, 0],
+                [1, 1, 0, 0, 2]
+            ];
+
+            let playerPosition = { x: 0, y: 0 };
+
+            gameArea.innerHTML = `
+                <h3>Logic Labyrinth</h3>
+                <p>Guía al jugador (azul) hasta la meta (verde) usando las flechas del teclado.</p>
+                <div class="maze" id="maze-grid"></div>
+            `;
+
+            const mazeGrid = document.getElementById('maze-grid');
+            mazeGrid.style.gridTemplateColumns = `repeat(${maze[0].length}, 30px)`;
+
+            function renderMaze() {
+                mazeGrid.innerHTML = '';
+                maze.forEach((row, y) => {
+                    row.forEach((cell, x) => {
+                        const cellElement = document.createElement('div');
+                        cellElement.classList.add('maze-cell');
+                        if (x === playerPosition.x && y === playerPosition.y) {
+                            cellElement.classList.add('player');
+                        } else if (cell === 1) {
+                            cellElement.classList.add('wall');
+                        } else if (cell === 2) {
+                            cellElement.classList.add('goal');
+                        }
+                        mazeGrid.appendChild(cellElement);
+                    });
+                });
+            }
+
+            function movePlayer(dx, dy) {
+                const newX = playerPosition.x + dx;
+                const newY = playerPosition.y + dy;
+                if (newX >= 0 && newX < maze[0].length && newY >= 0 && newY < maze.length && maze[newY][newX] !== 1) {
+                    playerPosition.x = newX;
+                    playerPosition.y = newY;
+                    renderMaze();
+                    checkWin();
+                }
+            }
+
+            function checkWin() {
+                if (maze[playerPosition.y][playerPosition.x] === 2) {
+                    messageArea.textContent = '¡Felicidades! Has completado el laberinto.';
+                    messageArea.style.color = '#4caf50';
+                }
+            }
+
+            document.addEventListener('keydown', (e) => {
+                switch (e.key) {
+                    case 'ArrowUp': movePlayer(0, -1); break;
+                    case 'ArrowDown': movePlayer(0, 1); break;
+                    case 'ArrowLeft': movePlayer(-1, 0); break;
+                    case 'ArrowRight': movePlayer(1, 0); break;
+                }
+            });
+
+            renderMaze();
+        }
+
+        // Emoji Match Game
+        function startEmojiMatch() {
+            const emojis = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼'];
+            const shuffledEmojis = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
+            let flippedCards = [];
+            let matchedPairs = 0;
+
+            gameArea.innerHTML = `
+                <h3>Emoji Match</h3>
+                <p>Encuentra todos los pares de emojis. ¡Entrena tu memoria!</p>
+                <div class="emoji-match-grid"></div>
+            `;
+
+            const grid = document.querySelector('.emoji-match-grid');
+
+            shuffledEmojis.forEach((emoji, index) => {
+                const card = document.createElement('div');
+                card.classList.add('emoji-card');
+                card.dataset.emoji = emoji;
+                card.dataset.index = index;
+                card.addEventListener('click', flipCard);
+                grid.appendChild(card);
+            });
+
+            function flipCard() {
+                if (flippedCards.length < 2 && !this.classList.contains('flipped')) {
+                    this.textContent = this.dataset.emoji;
+                    this.classList.add('flipped');
+                    flippedCards.push(this);
+
+                    if (flippedCards.length === 2) {
+                        setTimeout(checkMatch, 500);
+                    }
+                }
+            }
+
+            function checkMatch() {
+                const [card1, card2] = flippedCards;
+                if (card1.dataset.emoji === card2.dataset.emoji) {
+                    matchedPairs++;
+                    if (matchedPairs === emojis.length) {
+                        messageArea.textContent = '¡Felicidades! Has encontrado todos los pares.';
+                        messageArea.style.color = '#4caf50';
+                        showConfetti();
+                    }
+                } else {
+                    card1.textContent = '';
+                    card2.textContent = '';
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                }
+                flippedCards = [];
+            }
+        }
+
+        function showConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+        document.getElementById('game1').addEventListener('click', startCodeWord);
+        document.getElementById('game2').addEventListener('click', startCSSColorMatch);
+        document.getElementById('game3').addEventListener('click', startLogicLabyrinth);
+        document.getElementById('game4').addEventListener('click', startEmojiMatch);
+    </script>
+</body>
+</html>
+
